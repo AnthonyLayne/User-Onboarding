@@ -1,11 +1,12 @@
 import React from "react";
 
-const Form = (props) => {
-  const { change, submit, errors } = props;
-  const { username, email, password, terms } = props.values;
-
-  const onChange = (e) => {
-    const { name, value, checked, type } = e.target;
+const Form = ({
+  change,
+  submit,
+  errors,
+  values: { username, email, password, terms },
+}) => {
+  const onChange = ({ target: { name, value, checked, type } }) => {
     const newValue = type === "checkbox" ? checked : value;
     change(name, newValue);
   };
@@ -15,11 +16,14 @@ const Form = (props) => {
     submit();
   };
 
+  // username is re-named usernameError, same with password.
+  const { username: usernameError, password: passwordError } = errors;
+
   return (
     <div>
       <h1>Please Input Your Information</h1>
-      <p>{errors.username}</p>
-      <p>{errors.password}</p>
+      <p>{usernameError}</p>
+      <p>{passwordError}</p>
       <p>{errors.email}</p>
       <p>{errors.terms}</p>
       <form onSubmit={onSubmit}>

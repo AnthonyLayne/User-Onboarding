@@ -46,6 +46,7 @@ function App() {
     validate(name, value);
     setFormVal({ ...formVal, [name]: value });
   };
+
   return (
     <div className="App">
       <Form
